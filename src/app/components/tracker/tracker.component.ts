@@ -141,4 +141,8 @@ export class TrackerComponent implements OnInit {
     this.tutorialService.getAll().subscribe();
     console.log('retrieve stocks');
   }
+
+  getCompanyData() {
+    console.log('get company data');
+  }
 }

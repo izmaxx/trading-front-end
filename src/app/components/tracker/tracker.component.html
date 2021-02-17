@@ -1,5 +1,10 @@
 <div class="row">
-  <a (click)="getStock()" mat-raised-button color="primary">Get Stock Data</a>
+  <a (click)="getStock()" mat-raised-button color="primary"
+    >Initialize Tickers</a
+  >
+  <a (click)="getCompanyData()" mat-raised-button color="primary"
+    >Get Company Data</a
+  >
   <table mat-table [dataSource]="companies$" class="mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Company } from '../models/company';
 import { Tutorial } from '../models/tutorial.model';
 
-const baseUrl = 'http://localhost:8000/companies/';
+const baseUrl = 'http://localhost:8000/';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +13,11 @@ export class TutorialService {
   constructor(private http: HttpClient) {}
 
   getStocks(): Observable<Company[]> {
-    return this.http.get<Company[]>(baseUrl);
+    return this.http.get<Company[]>(`${baseUrl}companies/`);
   }
 
   getAll(): Observable<any> {
-    return this.http.post<any>(`${baseUrl}all`, null);
+    return this.http.post<any>(`${baseUrl}tickers/all`, null);
   }
 
   get(id: any): Observable<Tutorial> {
