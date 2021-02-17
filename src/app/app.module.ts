@@ -11,14 +11,14 @@ import { FooterComponent } from './components/components/footer/footer.component
 import { HeaderComponent } from './components/header/header.component';
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
     TutorialDetailsComponent,
     TrackerComponent,
-    HeaderComponent,
-    FooterComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     MatTableModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

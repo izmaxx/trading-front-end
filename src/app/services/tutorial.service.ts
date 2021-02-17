@@ -1,19 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Company } from '../models/company';
 import { Tutorial } from '../models/tutorial.model';
 
-const baseUrl = 'http://localhost:8080/api/tutorials';
+const baseUrl = 'http://localhost:8000/companies/';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TutorialService {
+  constructor(private http: HttpClient) {}
 
-   constructor(private http: HttpClient) { }
+  getStocks(): Observable<Company[]> {
+    return this.http.get<Company[]>(baseUrl);
+  }
 
-  getAll(): Observable<Tutorial[]> {
-    return this.http.get<Tutorial[]>(baseUrl);
+  getAll(): Observable<any> {
+    return this.http.post<any>(`${baseUrl}all`, null);
   }
 
   get(id: any): Observable<Tutorial> {
