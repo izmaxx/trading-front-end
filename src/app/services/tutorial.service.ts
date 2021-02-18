@@ -16,6 +16,10 @@ export class TutorialService {
     return this.http.get<Company[]>(`${baseUrl}companies/`);
   }
 
+  getCompanyData(): Observable<any> {
+    return this.http.post<any>(`${baseUrl}companies/data`, null);
+  }
+
   getAll(): Observable<any> {
     return this.http.post<any>(`${baseUrl}tickers/all`, null);
   }

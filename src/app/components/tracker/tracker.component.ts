@@ -143,6 +143,7 @@ export class TrackerComponent implements OnInit {
   }
 
   getCompanyData() {
+    this.tutorialService.getCompanyData().subscribe();
     console.log('get company data');
   }
 }
