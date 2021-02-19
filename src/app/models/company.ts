@@ -7,4 +7,5 @@ export interface Company {
   high: number;
   low: number;
   insiderThreeMonth: number;
+  active: boolean;
 }

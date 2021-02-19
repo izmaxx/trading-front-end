@@ -20,6 +20,13 @@ export class TutorialService {
     return this.http.post<any>(`${baseUrl}companies/data`, null);
   }
 
+  updateCompany(company: Company): Observable<any> {
+    return this.http.put<any>(
+      `${baseUrl}companies/${company.ticker}/`,
+      company
+    );
+  }
+
   getAll(): Observable<any> {
     return this.http.post<any>(`${baseUrl}tickers/all`, null);
   }

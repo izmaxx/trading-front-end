@@ -16,6 +16,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { IndustryComponent } from './components/industry/industry.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ShortNumberPipe } from './pipes/short-number.pipe';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,10 @@ import { ShortNumberPipe } from './pipes/short-number.pipe';
     MatButtonModule,
     FlexLayoutModule,
     MatTooltipModule,
+    MatSlideToggleModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

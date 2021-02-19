@@ -1,72 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Company } from 'src/app/models/company';
 import { Tutorial } from 'src/app/models/tutorial.model';
 import { TutorialService } from 'src/app/services/tutorial.service';
-
-const ELEMENT_DATA: Company[] = [
-  {
-    name: 'Apple',
-    ticker: 'AAPL',
-    marketCap: 100,
-    industry: 'Technology',
-    price: 80,
-    high: 100,
-    low: 50,
-    insiderThreeMonth: 2,
-  },
-  {
-    name: 'Apple',
-    ticker: 'AAPL',
-    marketCap: 100,
-    industry: 'Technology',
-    price: 80,
-    high: 100,
-    low: 50,
-    insiderThreeMonth: 2,
-  },
-  {
-    name: 'Apple',
-    ticker: 'AAPL',
-    marketCap: 100,
-    industry: 'Technology',
-    price: 80,
-    high: 100,
-    low: 50,
-    insiderThreeMonth: 2,
-  },
-  {
-    name: 'Apple',
-    ticker: 'AAPL',
-    marketCap: 100,
-    industry: 'Technology',
-    price: 80,
-    high: 100,
-    low: 50,
-    insiderThreeMonth: 2,
-  },
-  {
-    name: 'Apple',
-    ticker: 'AAPL',
-    marketCap: 100,
-    industry: 'Technology',
-    price: 80,
-    high: 100,
-    low: 50,
-    insiderThreeMonth: 2,
-  },
-  {
-    name: 'Apple',
-    ticker: 'AAPL',
-    marketCap: 100,
-    industry: 'Technology',
-    price: 80,
-    high: 100,
-    low: 50,
-    insiderThreeMonth: 2,
-  },
-];
 
 @Component({
   selector: 'app-tracker',
@@ -88,10 +26,14 @@ export class TrackerComponent implements OnInit {
     'low',
     'high',
     'insiderThreeMonth',
+    'activate',
+    'toggle',
   ];
-  dataSource = ELEMENT_DATA;
 
-  constructor(private tutorialService: TutorialService) {}
+  constructor(
+    private tutorialService: TutorialService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.retrieveTutorials();
@@ -144,5 +86,16 @@ export class TrackerComponent implements OnInit {
   getCompanyData() {
     this.tutorialService.getCompanyData().subscribe();
     console.log('get company data');
+  }
+
+  updateActiveStatus(element: Company) {
+    element.active = !element.active;
+    this.tutorialService
+      .updateCompany(element)
+      .subscribe(() =>
+        this.toastr.success(
+          'Updated ' + element.ticker + 'to ' + element.active
+        )
+      );
   }
 }
