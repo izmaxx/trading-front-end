@@ -7,10 +7,14 @@
   >
 </div>
 
+<mat-form-field>
+  <input matInput placeholder="Search Tickers" #input />
+</mat-form-field>
+
 <div class="row">
-  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+  <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
     <mat-spinner></mat-spinner>
-  </div>
+  </div> -->
   <table
     mat-table
     [dataSource]="dataSource"
@@ -35,7 +39,7 @@
     <ng-container matColumnDef="marketCap">
       <th mat-header-cell *matHeaderCellDef>Market Cap</th>
       <td
-        [ngClass]="{ red: element.marketCap > 100 }"
+        [ngClass]="{ smallcap: element.marketCap < 2000000000 }"
         mat-cell
         *matCellDef="let element"
       >

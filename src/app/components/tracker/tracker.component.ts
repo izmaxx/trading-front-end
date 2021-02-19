@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Company } from 'src/app/models/company';
 import { CompanyFilterCriteria } from 'src/app/models/company-filter-criteria';
@@ -10,6 +10,7 @@ import { TutorialService } from 'src/app/services/tutorial.service';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { MatSort } from '@angular/material/sort';
 import { SortDirection } from '@angular/material/sort';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tracker',
@@ -25,8 +26,8 @@ export class TrackerComponent implements OnInit {
     sortAscending: 'asc',
   };
 
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('input') input!: ElementRef;
 
   displayedColumns: string[] = [
     'ticker',
@@ -55,6 +56,17 @@ export class TrackerComponent implements OnInit {
       this.filterCriteria.sortAscending = sortChange.direction;
       this.refreshList();
     });
+
+    fromEvent(this.input.nativeElement, 'keyup')
+      .pipe(
+        debounceTime(150),
+        distinctUntilChanged(),
+        tap(() => {
+          this.filterCriteria.ticker = this.input.nativeElement.value;
+          this.refreshList();
+        })
+      )
+      .subscribe();
   }
 
   refreshList() {
