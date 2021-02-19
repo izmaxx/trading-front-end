@@ -81,7 +81,6 @@ export class TrackerComponent implements OnInit {
   companies$ = new Observable<Company[]>();
 
   displayedColumns: string[] = [
-    'name',
     'ticker',
     'marketCap',
     'industry',

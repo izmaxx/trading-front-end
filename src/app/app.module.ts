@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { IndustryComponent } from './components/industry/industry.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { IndustryComponent } from './components/industry/industry.component';
     BrowserAnimationsModule,
     MatButtonModule,
     FlexLayoutModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
