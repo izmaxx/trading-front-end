@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { IndustryComponent } from './components/industry/industry.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ShortNumberPipe } from './pipes/short-number.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     TrackerComponent,
     HeaderComponent,
     IndustryComponent,
+    ShortNumberPipe,
   ],
   imports: [
     BrowserModule,
