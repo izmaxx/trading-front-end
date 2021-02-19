@@ -18,6 +18,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ShortNumberPipe } from './pipes/short-number.pipe';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ToastrModule } from 'ngx-toastr';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

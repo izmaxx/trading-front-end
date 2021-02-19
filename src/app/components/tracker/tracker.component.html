@@ -6,14 +6,26 @@
     >Get Company Data</a
   >
 </div>
+
 <div class="row">
-  <table mat-table [dataSource]="companies$" class="mat-elevation-z8">
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8"
+    matSort
+    matSortActive="ticker"
+    matSortDirection="asc"
+    matSortDisableClear
+  >
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
     <!-- Name Column -->
     <ng-container matColumnDef="ticker">
-      <th mat-header-cell *matHeaderCellDef>Ticker</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ticker</th>
       <td mat-cell matTooltip="{{ element.name }}" *matCellDef="let element">
         {{ element.ticker }}
       </td>

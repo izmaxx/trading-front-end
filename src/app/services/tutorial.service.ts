@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Company } from '../models/company';
+import { CompanyFilterCriteria } from '../models/company-filter-criteria';
 import { Tutorial } from '../models/tutorial.model';
+import { filter, map } from 'rxjs/operators';
 
 const baseUrl = 'http://localhost:8000/';
 
@@ -53,5 +55,15 @@ export class TutorialService {
 
   findByTitle(title: any): Observable<Tutorial[]> {
     return this.http.get<Tutorial[]>(`${baseUrl}?title=${title}`);
+  }
+
+  findCompanies(filterCriteria: CompanyFilterCriteria): Observable<Company[]> {
+    return this.http.get<Company[]>(`${baseUrl}companies/search`, {
+      params: new HttpParams()
+        .set('ticker', filterCriteria.ticker)
+        .set('active', String(filterCriteria.active))
+        .set('sortAscending', filterCriteria.sortAscending)
+        .set('sortField', filterCriteria.sortField),
+    });
   }
 }

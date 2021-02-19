@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Company } from 'src/app/models/company';
+import { CompanyFilterCriteria } from 'src/app/models/company-filter-criteria';
 import { Tutorial } from 'src/app/models/tutorial.model';
+import { CompanyDataSource } from 'src/app/services/company.datasource';
 import { TutorialService } from 'src/app/services/tutorial.service';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { MatSort } from '@angular/material/sort';
+import { SortDirection } from '@angular/material/sort';
 
 @Component({
   selector: 'app-tracker',
@@ -12,11 +17,16 @@ import { TutorialService } from 'src/app/services/tutorial.service';
   styleUrls: ['./tracker.component.scss'],
 })
 export class TrackerComponent implements OnInit {
-  tutorials?: Tutorial[];
-  currentTutorial?: Tutorial;
-  currentIndex = -1;
-  title = '';
-  companies$ = new Observable<Company[]>();
+  dataSource!: CompanyDataSource;
+  filterCriteria: CompanyFilterCriteria = {
+    ticker: '',
+    active: true,
+    sortField: 'ticker',
+    sortAscending: 'asc',
+  };
+
+  @ViewChild(MatSort)
+  sort!: MatSort;
 
   displayedColumns: string[] = [
     'ticker',
@@ -36,48 +46,20 @@ export class TrackerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.retrieveTutorials();
+    this.dataSource = new CompanyDataSource(this.tutorialService);
+    this.dataSource.loadCompanies(this.filterCriteria);
   }
 
-  retrieveTutorials(): void {
-    this.companies$ = this.tutorialService.getStocks();
+  ngAfterViewInit(): void {
+    this.sort.sortChange.subscribe((sortChange) => {
+      this.filterCriteria.sortAscending = sortChange.direction;
+      this.refreshList();
+    });
   }
 
-  refreshList(): void {
-    this.retrieveTutorials();
-    this.currentTutorial = undefined;
-    this.currentIndex = -1;
+  refreshList() {
+    this.dataSource.loadCompanies(this.filterCriteria);
   }
-
-  setActiveTutorial(tutorial: Tutorial, index: number): void {
-    this.currentTutorial = tutorial;
-    this.currentIndex = index;
-  }
-
-  removeAllTutorials(): void {
-    this.tutorialService.deleteAll().subscribe(
-      (response) => {
-        console.log(response);
-        this.refreshList();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  searchTitle(): void {
-    this.tutorialService.findByTitle(this.title).subscribe(
-      (data) => {
-        this.tutorials = data;
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
   getStock() {
     this.tutorialService.getAll().subscribe();
     console.log('retrieve stocks');
