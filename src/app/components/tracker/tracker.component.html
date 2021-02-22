@@ -5,6 +5,9 @@
   <a (click)="getCompanyData()" mat-raised-button color="primary"
     >Get Company Data</a
   >
+  <a (click)="syncCompanyCik()" mat-raised-button color="primary"
+    >Sync CIK from SEC</a
+  >
 </div>
 
 <mat-form-field>
@@ -31,7 +34,7 @@
     <ng-container matColumnDef="ticker">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ticker</th>
       <td mat-cell matTooltip="{{ element.name }}" *matCellDef="let element">
-        {{ element.ticker }}
+        <a routerLink="{{ element.ticker }}">{{ element.ticker }}</a>
       </td>
     </ng-container>
 

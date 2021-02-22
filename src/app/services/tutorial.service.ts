@@ -22,6 +22,10 @@ export class TutorialService {
     return this.http.post<any>(`${baseUrl}companies/data`, null);
   }
 
+  synchCompanyCik(): Observable<any> {
+    return this.http.post<any>(`${baseUrl}companies/cik`, null);
+  }
+
   updateCompany(company: Company): Observable<any> {
     return this.http.put<any>(
       `${baseUrl}companies/${company.ticker}/`,

@@ -82,6 +82,11 @@ export class TrackerComponent implements OnInit {
     console.log('get company data');
   }
 
+  syncCompanyCik() {
+    this.tutorialService.synchCompanyCik().subscribe();
+    console.log('synch company CIK');
+  }
+
   updateActiveStatus(element: Company) {
     element.active = !element.active;
     this.tutorialService

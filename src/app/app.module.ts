@@ -22,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
+import { StockDetailsComponent } from './components/stock-details/stock-details.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatInputModule } from '@angular/material/input';
     HeaderComponent,
     IndustryComponent,
     ShortNumberPipe,
+    StockDetailsComponent,
   ],
   imports: [
     BrowserModule,
