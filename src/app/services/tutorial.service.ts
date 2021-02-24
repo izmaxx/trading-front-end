@@ -14,6 +14,10 @@ const baseUrl = 'http://localhost:8000/';
 export class TutorialService {
   constructor(private http: HttpClient) {}
 
+  retrievePrices(): Observable<any> {
+    return this.http.post<any>(`${baseUrl}companies/quotes`, null);
+  }
+
   getStocks(): Observable<Company[]> {
     return this.http.get<Company[]>(`${baseUrl}companies/`);
   }

@@ -47,6 +47,7 @@ export class TrackerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.tutorialService.retrievePrices().subscribe();
     this.dataSource = new CompanyDataSource(this.tutorialService);
     this.dataSource.loadCompanies(this.filterCriteria);
   }
