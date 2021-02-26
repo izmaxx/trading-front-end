@@ -1,6 +1,9 @@
 # TradingFrontEnd
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+Hobby project inspired by Roaring Kitty's analysis spreadsheets for gathering stock market data for "crunch time".  This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+## Goals
+- Retrieve SEC EDGAR filings to gather fundamentals and insider trade filings
+- Build composite scores based on investment strategies such as institutional holdings, fundamentals, social media/news sentiment analysis
 
 ## Development server
 
